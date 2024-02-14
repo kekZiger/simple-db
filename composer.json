@@ -1,8 +1,16 @@
 {
+    "name": "marcel/database-class",
+    "description": "absolute simple database class for pdo and prepared statements",
     "autoload": {
         "psr-4": {
-            "Marcel\\": "lib/simple-db",
-            "Marcel\\Auth\\": "lib/Auth"
+            "Marcel\\DatabaseClass\\": "src/"
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "Marcel Albrecht",
+            "email": "marcel@albrecht.tools"
+        }
+    ],
+    "require": {}
 }
