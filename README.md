@@ -2,9 +2,4 @@
 
 ## per composer.json laden
 
-    "autoload": {
-        "psr-4": {
-            "Marcel\\": "lib/simple-db",
-            "Marcel\\Auth\\": "lib/Auth"
-        }
-    },
+composer require marcel/database-class
