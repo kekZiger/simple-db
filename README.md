@@ -3,5 +3,5 @@
 ## per composer.json laden
 
 ```
-composer require marcel/database-class
+composer require albrecht/database-class
 ```
