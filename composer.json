@@ -6,6 +6,7 @@
             "Marcel\\DatabaseClass\\": "src/"
         }
     },
+    "license": "MIT",
     "authors": [
         {
             "name": "Marcel Albrecht",
