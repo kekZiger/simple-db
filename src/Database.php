@@ -17,11 +17,6 @@ class Database {
 
     private $connection = null;
 
-    /**
-     * Undocumented function
-     *
-     * 
-     */
     public function __construct($host = "", $database = "", $user = "", $password = "") {
         try {
             $this->connection = new PDO("mysql:host={$host};dbname={$database};", $user, $password);
