@@ -5,12 +5,23 @@ namespace Marcel\DatabaseClass;
 use \PDO;
 use \Exception;
 
-// Datenbankverbindung herstellen, objektorientiert.
-// Mal zum testen, ich mag ja Klassen zu benutzen.
+/**
+ * Database Class
+ * 
+ * @param string $host
+ * @param string $database
+ * @param string $user
+ * @param string $password
+ */
 class Database {
 
     private $connection = null;
 
+    /**
+     * Undocumented function
+     *
+     * 
+     */
     public function __construct($host = "", $database = "", $user = "", $password = "") {
         try {
             $this->connection = new PDO("mysql:host={$host};dbname={$database};", $user, $password);
@@ -21,6 +32,14 @@ class Database {
         }
     }
 
+    /**
+     * fetch result as array
+     *
+     * @param string $query
+     * @param array $params
+     * @param boolean $debug
+     * @return void
+     */
     public function fetchArray($query, $params = [], $debug = FALSE) {
         try {
             $pdoStatement = $this->connection->prepare($query);
@@ -36,6 +55,15 @@ class Database {
         }
     }
 
+    /**
+     * fetch single result, define column you want
+     *
+     * @param string $query
+     * @param array $params
+     * @param boolean $debug
+     * @param integer $column
+     * @return void
+     */
     public function fetchSingleResult($query, $params = [], $debug = FALSE, $column = 0) {
         try {
             $pdoStatement = $this->connection->prepare($query);
@@ -51,6 +79,14 @@ class Database {
         }
     }
 
+    /**
+     * fetch last insert id
+     *
+     * @param string $query preg_match checks if string contains "INSERT INTO", returns "false" if not
+     * @param array $params
+     * @param boolean $debug
+     * @return void
+     */
     public function fetchInsertId($query, $params = [], $debug = FALSE) {
 
         if (!preg_match("/^INSERT INTO /", $query)) return false;
@@ -69,6 +105,14 @@ class Database {
         }
     }
 
+    /**
+     * if query runs, returns true
+     *
+     * @param [type] $query
+     * @param array $params
+     * @param boolean $debug
+     * @return void
+     */
     public function fetchNoResult($query, $params = [], $debug = FALSE) {
         try {
             $pdoStatement = $this->connection->prepare($query);
