@@ -1,15 +1,15 @@
 {
-    "name": "marcel/database-class",
+    "name": "albrecht/database-class",
     "description": "absolute simple database class for pdo and prepared statements",
     "autoload": {
         "psr-4": {
-            "Marcel\\DatabaseClass\\": "src/"
+            "Albrecht\\DatabaseClass\\": "src/"
         }
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Marcel Albrecht",
+            "name": "Albrecht",
             "email": "marcel@albrecht.tools"
         }
     ],

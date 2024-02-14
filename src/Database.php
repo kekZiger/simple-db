@@ -1,6 +1,6 @@
 <?php
 
-namespace Marcel\DatabaseClass;
+namespace Albrecht\DatabaseClass;
 
 use \PDO;
 use \Exception;
