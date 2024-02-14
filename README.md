@@ -2,4 +2,6 @@
 
 ## per composer.json laden
 
+```
 composer require marcel/database-class
+```
