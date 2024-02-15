@@ -15,9 +15,9 @@ use \Exception;
  */
 class Database {
 
-    private $connection = null;
+    private object $connection;
 
-    public function __construct($host = "", $database = "", $user = "", $password = "") {
+    public function __construct(string $host = "", string $database = "", string $user = "", string $password = "") {
         try {
             $this->connection = new PDO("mysql:host={$host};dbname={$database};", $user, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Error Ausgeben
@@ -31,11 +31,11 @@ class Database {
      * fetch result as array
      *
      * @param string $query
-     * @param array $params
+     * @param array<mixed> $params
      * @param boolean $debug
-     * @return void
+     * @return array<mixed>
      */
-    public function fetchArray($query, $params = [], $debug = FALSE) {
+    public function fetchArray($query, array $params, $debug = FALSE) {
         try {
             $pdoStatement = $this->connection->prepare($query);
             $pdoStatement->execute($params);
@@ -54,10 +54,10 @@ class Database {
      * fetch single result, define column you want
      *
      * @param string $query
-     * @param array $params
+     * @param array<mixed> $params
      * @param boolean $debug
      * @param integer $column
-     * @return void
+     * @return string
      */
     public function fetchSingleResult($query, $params = [], $debug = FALSE, $column = 0) {
         try {
@@ -78,9 +78,9 @@ class Database {
      * fetch last insert id
      *
      * @param string $query preg_match checks if string contains "INSERT INTO", returns "false" if not
-     * @param array $params
+     * @param array<mixed> $params
      * @param boolean $debug
-     * @return void
+     * @return bool|int
      */
     public function fetchInsertId($query, $params = [], $debug = FALSE) {
 
@@ -103,10 +103,10 @@ class Database {
     /**
      * if query runs, returns true
      *
-     * @param [type] $query
-     * @param array $params
+     * @param string $query
+     * @param array<mixed> $params
      * @param boolean $debug
-     * @return void
+     * @return bool
      */
     public function fetchNoResult($query, $params = [], $debug = FALSE) {
         try {
@@ -123,7 +123,13 @@ class Database {
         }
     }
 
-    private function debugParams($stmt) {
+    /**
+     * Save Debug Information to Variable
+     *
+     * @param object $stmt
+     * @return string|bool
+     */
+    private function debugParams(object $stmt) {
         ob_start();
         $stmt->debugDumpParams();
         $r = ob_get_contents();
@@ -131,9 +137,18 @@ class Database {
         return $r;
     }
 
-    private function printDebug($pdoStatement) {
+    /**
+     * Print Debug Information
+     *
+     * @param object $pdoStatement
+     * @return void
+     */
+    private function printDebug(object $pdoStatement) {
         echo 'DEBUG-START: <br><br>';
-        print_r(htmlspecialchars($this->debugParams($pdoStatement)));
+        $debugParams = (string) $this->debugParams($pdoStatement);
+        if ($debugParams != false) {
+            print_r(htmlspecialchars($debugParams));
+        }
         echo '<br><br>DEBUG-END';
     }
 }
