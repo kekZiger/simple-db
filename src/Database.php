@@ -23,7 +23,7 @@ class Database {
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Error Ausgeben
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Standardmäßig immer Fetch_Assoc nutzen
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), (int)$e->getCode());
         }
     }
 
@@ -46,7 +46,7 @@ class Database {
 
             return $pdoStatement->fetchAll();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), (int)$e->getCode());
         }
     }
 
@@ -70,7 +70,7 @@ class Database {
 
             return $pdoStatement->fetchColumn($column);
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), (int)$e->getCode());
         }
     }
 
@@ -96,7 +96,7 @@ class Database {
 
             return $this->connection->lastInsertId();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), (int)$e->getCode());
         }
     }
 
@@ -119,7 +119,7 @@ class Database {
 
             return true;
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage(), (int)$e->getCode());
         }
     }
 
